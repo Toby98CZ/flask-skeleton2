@@ -1,0 +1,20 @@
+{% from "macros/fields.tmpl" import render_input_field, render_submit %}
+{% extends "shared/layout.tmpl" %}
+
+{% block title %}LIST{% endblock %}
+
+{% block content %}
+  <h3>Tasklist</h3>
+  <div class="form-group">Type in the email address you used when signing up and we'll send you a link to reset your password.</div>
+ <table class="table">
+    {% for n in data %}
+        <tr><td>{{ n.id }}</td>
+        <td>{{ n.TaskName }}</td>
+        <td>{{ n.Description }}</td>
+        <td>
+            <a type="button" class="btn btn-danger" href='{{url_for("public.RemoveTask",idpassed=n.id)}}'>REMOVE</a>
+        </td></tr>
+    {% endfor %}
+    </table>
+    <a type="button" class="btn btn-info" href='{{url_for("public.AddTaskLog")}}'>ADD</a>
+{% endblock %}
