@@ -4,17 +4,20 @@
 {% block title %}LIST{% endblock %}
 
 {% block content %}
-  <h3>Tasklist</h3>
-  <div class="form-group">Type in the email address you used when signing up and we'll send you a link to reset your password.</div>
+  <h3>Seznam jmen</h3>
+  <div class="form-group">Kliknutím na new přidáte nové jméno</div>
  <table class="table">
+    <tr style="border-bottom: 1px solid lightgrey;"><td>Pořadí</td><td>Jméno</td><td>Přijmení</td></tr>
+
     {% for n in data %}
-        <tr><td>{{ n.id }}</td>
+        <tr><td>{{ n.id }}.</td>
         <td>{{ n.TaskName }}</td>
         <td>{{ n.Description }}</td>
         <td>
-            <a type="button" class="btn btn-danger" href='{{url_for("public.RemoveTask",idpassed=n.id)}}'>REMOVE</a>
+            <a type="button" class="btn btn-danger" href='{{url_for("public.RemoveTask",idpassed=n.id)}}'>DELETE</a>
+            <a type="button" class="btn btn-success" href='{{url_for("public.EditTaskLog",idpassed=n.id)}}'>EDIT</a>
         </td></tr>
     {% endfor %}
     </table>
-    <a type="button" class="btn btn-info" href='{{url_for("public.AddTaskLog")}}'>ADD</a>
+    <a type="button" class="btn btn-info" href='{{url_for("public.AddTaskLog")}}'>NEW</a>
 {% endblock %}

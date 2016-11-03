@@ -41,11 +41,21 @@ class LogUserForm(Form):
 
 class AddTaskForm(Form):
 
-    TaskName = TextField('Set name of the task', validators=[
+    TaskName = TextField('Jmeno', validators=[
         Length(max=30, message="Please don't use more than 30 characters"),
         InputRequired(message="You can't leave this empty")
     ])
-    Description = TextField('You can add description', validators=[
+    Description = TextField('Prijmeni', validators=[
+        Length(max=100, message="Please don't use more than 100 characters"),
+    ])
+
+class EditTaskForm(Form):
+
+    TaskName = TextField('Zmenit Jmeno', validators=[
+        Length(max=30, message="Please don't use more than 30 characters"),
+        InputRequired(message="You can't leave this empty")
+    ])
+    Description = TextField('Zmenit Prijmeni', validators=[
         Length(max=100, message="Please don't use more than 100 characters"),
     ])
 

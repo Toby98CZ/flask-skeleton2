@@ -2,7 +2,7 @@
 Logic for dashboard related routes
 """
 from flask import Blueprint, render_template, redirect, url_for
-from .forms import LogUserForm, AddTaskForm
+from .forms import LogUserForm, AddTaskForm, EditTaskForm
 from ..data.database import db
 from ..data.models import LogUser, Task
 blueprint = Blueprint('public', __name__)
@@ -52,3 +52,11 @@ def RemoveTask(idpassed):
         #return redirect(url_for('public.WriteTaskLog'))
     db.session.commit()
     return redirect(url_for('public.WriteTaskLog'))
+
+@blueprint.route('/editTask/<int:idpassed>', methods=['GET', 'POST'])
+def EditTaskLog(idpassed):
+    form = EditTaskForm(idpassed)
+    if form.validate_on_submit():
+        Task.create(**form.data)
+    return render_template("public/EditTask.tmpl", form=form)
+
