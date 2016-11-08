@@ -53,10 +53,17 @@ def RemoveTask(idpassed):
     db.session.commit()
     return redirect(url_for('public.WriteTaskLog'))
 
+#@blueprint.route('/editTask/<int:idpassed>', methods=['GET', 'POST'])
+#def EditTaskLog(idpassed):
+ #   form = EditTaskForm(idpassed)
+  #  if form.validate_on_submit():
+   #     Task.create(**form.data)
+    #return render_template("public/EditTask.tmpl", form=form)
+
 @blueprint.route('/editTask/<int:idpassed>', methods=['GET', 'POST'])
 def EditTaskLog(idpassed):
-    form = EditTaskForm(idpassed)
+    pole = db.session.query(Task).filter_by(id=idpassed).first()
+    form = AddTaskForm(obj=pole)
     if form.validate_on_submit():
-        Task.create(**form.data)
-    return render_template("public/EditTask.tmpl", form=form)
-
+      pole.update(**form.data)
+    return render_template("public/AddTask.tmpl", form=form)

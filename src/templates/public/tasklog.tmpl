@@ -4,19 +4,26 @@
 {% block title %}LIST{% endblock %}
 
 {% block content %}
+
   <h3>Seznam jmen</h3>
   <div class="form-group">Kliknutím na new přidáte nové jméno</div>
  <table class="table">
-    <tr style="border-bottom: 1px solid lightgrey;"><td>Pořadí</td><td>Jméno</td><td>Přijmení</td></tr>
+    <tr style="border-bottom: 1px solid lightgrey; border-top: 1px solid lightgrey;">
+        <td style="border-right: 1px solid lightgrey;"><b>Pořadí</b></td>
+        <td style="border-right: 1px solid lightgrey;"><b>Jméno</b></td>
+        <td><b>Přijmení</b></td>
+    </tr>
 
     {% for n in data %}
-        <tr><td>{{ n.id }}.</td>
-        <td>{{ n.TaskName }}</td>
-        <td>{{ n.Description }}</td>
-        <td>
-            <a type="button" class="btn btn-danger" href='{{url_for("public.RemoveTask",idpassed=n.id)}}'>DELETE</a>
-            <a type="button" class="btn btn-success" href='{{url_for("public.EditTaskLog",idpassed=n.id)}}'>EDIT</a>
-        </td></tr>
+        <tr>
+            <td style="border-right: 1px solid lightgrey;">{{ n.id }}.</td>
+            <td style="border-right: 1px solid lightgrey;">{{ n.TaskName }}</td>
+            <td style="border-right: 1px solid lightgrey;">{{ n.Description }}</td>
+            <td>
+                <a type="button" class="btn btn-danger" href='{{url_for("public.RemoveTask",idpassed=n.id)}}'>DELETE</a>
+                <a type="button" class="btn btn-success" href='{{url_for("public.EditTaskLog",idpassed=n.id)}}'>EDIT</a>
+            </td>
+        </tr>
     {% endfor %}
     </table>
     <a type="button" class="btn btn-info" href='{{url_for("public.AddTaskLog")}}'>NEW</a>
